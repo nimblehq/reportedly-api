@@ -1,0 +1,46 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:12.1
+    container_name: reportedly_api_db
+    environment:
+      - POSTGRES_DB=reportedly_api_production
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:5.0.7
+    container_name: reportedly_api_redis
+    ports:
+      - "6379:6379"
+
+  web:
+    build:
+      context: .
+      cache_from:
+        - ${DOCKER_IMAGE}:${BRANCH_TAG}
+      args:
+        - BUILD_ENV=production
+        - RUBY_ENV=production
+    image: ${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: reportedly_api_web
+    command: bin/start.sh
+    ports:
+      - "${PORT}:${PORT}"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - "ruby-bundle:/bundle"
+    environment:
+      - RACK_ENV=production
+      - RAILS_ENV=production
+      - DATABASE_URL=postgres://postgres@db/reportedly_api_production
+      - DEFAULT_HOST
+      - MAILER_SENDER
+      - RAILS_MASTER_KEY
+
+volumes:
+  ruby-bundle:

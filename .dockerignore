@@ -1,0 +1,12 @@
+.github
+.gitignore
+.semaphore
+.semaphore-cache
+log/
+tmp/
+!tmp/docker
+coverage/
+docker-compose.dev.yml
+docker-compose.test.yml
+docker-compose.yml
+README.md

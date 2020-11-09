@@ -1,0 +1,46 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:12.1
+    container_name: reportedly_api_db
+    environment:
+      - POSTGRES_DB=reportedly_api_test
+    ports:
+      - "5432"
+
+  redis:
+    image: redis:5.0.7
+    container_name: reportedly_api_redis
+    ports:
+      - "6379"
+
+  test:
+    build:
+      context: .
+      cache_from:
+        - ${DOCKER_IMAGE}:${BRANCH_TAG}
+      args:
+        - BUILD_ENV=test
+        - RUBY_ENV=test
+    image: ${DOCKER_IMAGE}:${BRANCH_TAG}
+    container_name: reportedly_api_test
+    command: bin/test.sh
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - "ruby-bundle:/bundle"
+      - "${PWD}/coverage:/reportedly_api/coverage"
+      - "${PWD}/log:/reportedly_api/log"
+    environment:
+      - RACK_ENV=test
+      - RAILS_ENV=test
+      - DB_HOST=db
+      - CI=$CI
+      - TEST_RETRY=$TEST_RETRY
+      - DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN
+      
+volumes:
+  ruby-bundle:

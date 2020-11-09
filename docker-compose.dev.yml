@@ -1,0 +1,16 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres:12.1
+    container_name: reportedly_api_db
+    environment:
+      - POSTGRES_DB=reportedly_api_development
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:5.0.7
+    container_name: reportedly_api_redis
+    ports:
+      - "6379:6379"
