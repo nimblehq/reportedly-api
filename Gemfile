@@ -16,6 +16,9 @@ gem 'bootsnap', require: false # Reduces boot times through caching; required in
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
 gem 'pundit' # Minimal authorization through OO design and pure Ruby classes
+gem 'devise-jwt'
+gem 'rack-cors'
+gem 'jsonapi-serializer'
 
 # Translations
 # gem 'devise-i18n' # Translations for Devise

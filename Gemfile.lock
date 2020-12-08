@@ -144,12 +144,32 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-jwt (0.8.0)
+      devise (~> 4.0)
+      warden-jwt_auth (~> 0.5)
     diff-lcs (1.4.4)
     docile (1.3.2)
+    dry-auto_inject (0.7.0)
+      dry-container (>= 0.3.4)
+    dry-configurable (0.11.6)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.4, >= 0.4.7)
+      dry-equalizer (~> 0.2)
+    dry-container (0.7.2)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1, >= 0.1.3)
+    dry-core (0.4.10)
+      concurrent-ruby (~> 1.0)
+    dry-equalizer (0.3.0)
     equalizer (0.0.11)
     erubi (1.9.0)
     erubis (2.7.0)
     fabrication (2.21.1)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faraday (1.1.0)
       multipart-post (>= 1.2, < 3)
       ruby2_keywords
@@ -175,6 +195,9 @@ GEM
     json_matchers (0.11.1)
       json_schema
     json_schema (0.20.9)
+    jsonapi-serializer (2.1.0)
+      activesupport (>= 4.2)
+    jwt (2.2.2)
     kramdown (2.3.0)
       rexml
     kramdown-parser-gfm (1.1.0)
@@ -235,6 +258,8 @@ GEM
     pundit (2.1.0)
       activesupport (>= 3.0.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rack-timeout (0.6.0)
@@ -396,6 +421,11 @@ GEM
       equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.9)
       rack (>= 2.0.9)
+    warden-jwt_auth (0.5.0)
+      dry-auto_inject (~> 0.6)
+      dry-configurable (~> 0.9)
+      jwt (~> 2.1)
+      warden (~> 1.2)
     webmock (3.9.2)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -425,11 +455,14 @@ DEPENDENCIES
   danger-undercover
   database_cleaner
   devise
+  devise-jwt
   fabrication
+  factory_bot_rails
   ffaker
   figaro
   foreman
   json_matchers
+  jsonapi-serializer
   letter_opener
   listen (= 3.1.5)
   mini_magick
@@ -440,6 +473,7 @@ DEPENDENCIES
   pry-rails
   puma
   pundit
+  rack-cors
   rack-timeout
   rails (= 6.0.3.2)
   rails-controller-testing
