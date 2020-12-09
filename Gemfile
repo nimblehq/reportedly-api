@@ -73,6 +73,7 @@ group :test do
   gem 'vcr' # Gem for recording test suite's HTTP interactions
   gem 'timecop' # Gem for time travel
   gem 'rails-controller-testing' # Gem that allow to use assigns as well ass assert_template
+  gem "shoulda-matchers", require: false
 end
 
 group :production do
