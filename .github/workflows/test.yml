@@ -1,0 +1,39 @@
+name: test
+
+on: push
+
+jobs:
+  run:
+    name: Run Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel previous runs
+        uses: styfle/cancel-workflow-action@0.5.0
+        with:
+          access_token: ${{ github.token }}
+
+      - uses: actions/checkout@v2.3.2
+        with:
+          fetch-depth: 100
+
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7.1'
+
+      - name: Bundle cache
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Bundle install
+        run: |
+          gem install bundler
+          bundle config path vendor/bundle
+          bundle config set with 'development'
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Rspec
+        run: bundle exec rspec
