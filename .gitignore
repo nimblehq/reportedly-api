@@ -41,3 +41,5 @@
 
 # Ignore the test coverage results from SimpleCov
 /coverage
+.rakeTasks
+.generators
