@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      - chore/task-13-setup-ci-cd
+      - staging
 
 jobs:
   deploy:
@@ -25,7 +25,7 @@ jobs:
           git push -f production origin/master:refs/heads/master
 
       - name: Deploy Staging
-        if: github.ref == 'refs/heads/chore/task-13-setup-ci-cd'
+        if: github.ref == 'refs/heads/staging'
         run: |
           git remote add staging https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_STAGING_APP.git
-          git push -f staging origin/chore/task-13-setup-ci-cd:refs/heads/master
+          git push -f staging origin/staging:refs/heads/master
