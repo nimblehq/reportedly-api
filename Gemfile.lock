@@ -180,6 +180,10 @@ GEM
     git_diff (0.4.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.11.6)
     hashdiff (1.0.1)
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
@@ -455,6 +459,8 @@ DEPENDENCIES
   ffaker
   figaro
   foreman
+  graphiql-rails
+  graphql (~> 1.9)
   json_matchers
   jsonapi-serializer
   letter_opener
