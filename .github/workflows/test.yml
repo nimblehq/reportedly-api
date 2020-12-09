@@ -28,7 +28,7 @@ jobs:
           ruby-version: 2.7.2
 
       - name: Install PostgreSQL
-          run: sudo apt-get -yqq install libpq-dev
+        run: sudo apt-get -yqq install libpq-dev
 
       - name: Bundle cache
         uses: actions/cache@v2
