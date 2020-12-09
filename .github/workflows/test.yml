@@ -6,6 +6,13 @@ jobs:
   run:
     name: Run Test
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:11.6
+        ports: ["5432:5432"]
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - name: Cancel previous runs
         uses: styfle/cancel-workflow-action@0.5.0
@@ -19,6 +26,9 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.7.2
+
+      - name: Install PostgreSQL
+          run: sudo apt-get -yqq install libpq-dev
 
       - name: Bundle cache
         uses: actions/cache@v2
@@ -34,6 +44,13 @@ jobs:
           bundle config path vendor/bundle
           bundle config set with 'development'
           bundle install --jobs 4 --retry 3
+
+      - name: Setup Database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: postgres
+        run: bin/rails db:create db:schema:load
 
       - name: Run Rspec
         run: bundle exec rspec
