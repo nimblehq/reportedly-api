@@ -5,7 +5,9 @@ module Api
     class RegistrationsController < Devise::RegistrationsController
       include ::Api::V1::ErrorHandler
 
+      # rubocop:disable Rails/LexicallyScopedActionFilter
       before_action :configure_sign_up_params, only: [:create]
+      # rubocop:enable Rails/LexicallyScopedActionFilter
 
       private
 
