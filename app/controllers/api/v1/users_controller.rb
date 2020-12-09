@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 module Api
   module V1
     class UsersController < Api::V1::BaseController
-
       def show
         render json: {
           status: { message: 'User found.' },

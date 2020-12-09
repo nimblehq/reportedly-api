@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Fabricator(:user) do
   email { 'fake@nimblehq.co' }
   slack_id { 'abcd007' }

@@ -3,7 +3,6 @@
 module Api
   module V1
     module ErrorHandler
-
       private
 
       def render_error(detail:, status: :unprocessable_entity)
