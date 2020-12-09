@@ -1,6 +1,12 @@
 name: test
 
-on: push
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+      - development
+      - staging
 
 jobs:
   run:
@@ -54,3 +60,8 @@ jobs:
 
       - name: Run Rspec
         run: bundle exec rspec
+
+      - name: Run Danger
+        run: bundle exec danger
+        env:
+          DANGER_GITHUB_API_TOKEN: ${{ secrets.DANGER_GITHUB_API_TOKEN }}
