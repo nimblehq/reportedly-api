@@ -13,7 +13,7 @@ module Api
         user = current_user
         if user.update(slack_id: user_update_params[:slack_id])
           render json: {
-            status: { message: 'User found.' },
+            status: { message: 'User updated.' },
             data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
           }
         else
