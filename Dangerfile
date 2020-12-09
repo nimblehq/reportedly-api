@@ -19,4 +19,4 @@ suggester.suggest
 simplecov.report 'coverage/coverage.json'
 
 # Report missing test coverage of new changes in Danger
-undercover.report
+# undercover.report
