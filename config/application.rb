@@ -55,6 +55,6 @@ module ReportedlyApi
 
     # Compress the responses to reduce the size of html/json controller responses.
     config.middleware.use Rack::Deflater
-    config.hosts << "898d5fad949e.ngrok.io"
+    config.hosts.clear
 end
 end
