@@ -9,6 +9,6 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   validates :slack_id, presence: true, uniqueness: true
-  validates :email, format: { with: /\b[A-Z0-9._%a-z\-]+@nimblehq\.co\z/,
+  validates :email, format: { with: /\A\b[A-Z0-9._%a-z\-]+@nimblehq\.co\z/,
                               message: 'must be a nimble account' }
 end
