@@ -36,8 +36,8 @@ class Report < ApplicationRecord
 
   def format_message
     "*What do you plan on tackling today?* \n
-      #{task_today} \n
+    #{task_today} \n
     *Okay, are you facing any blockers or unexpected issues? If yes, tell us what happened* \n
-      #{obstacles_today}"
+    #{obstacles_today}"
   end
 end
