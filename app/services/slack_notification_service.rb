@@ -6,9 +6,10 @@ require 'json'
 
 class SlackNotificationService
   class << self
+
+    # :reek:NilCheck
     def init_reporting_thread
       uri = URI.parse('https://slack.com/api/chat.postMessage')
-
       req_options = { use_ssl: uri.scheme == 'https' }
 
       return unless SlackThread.find_by(created_on: Time.zone.today).nil?

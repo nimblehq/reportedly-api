@@ -7,6 +7,7 @@ class Report < ApplicationRecord
 
   validates :task_today, :obstacles_today, presence: true
 
+  # :reek:FeatureEnvy
   def push_to_slack
     thread_ts = SlackThread.find_by(created_on: Time.zone.today).thread_ts
 
@@ -21,15 +22,16 @@ class Report < ApplicationRecord
 
   private
 
+  # :reek:FeatureEnvy
   def set_request_body(uri, thread_ts)
     request = Net::HTTP::Post.new(uri)
     request.content_type = 'application/json'
     request['Authorization'] = ENV['SLACK_REPLY_TOKEN']
     request.body = JSON.dump({
-                               'channel' => ENV['SLACK_CHANNEL'], # env var
-                               'thread_ts' => thread_ts,
-                               'text' => format_message,
-                               'as_user' => true
+                               channel: ENV['SLACK_CHANNEL'],
+                               thread_ts: thread_ts,
+                               text: format_message,
+                               as_user: true
                              })
     request
   end
