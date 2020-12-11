@@ -24,9 +24,9 @@ class Report < ApplicationRecord
   def set_request_body(uri, thread_ts)
     request = Net::HTTP::Post.new(uri)
     request.content_type = 'application/json'
-    request['Authorization'] = 'Bearer xoxp-1289907288471-1304856135091-1550445603463-3c641283a20c658609540e006d839495'
+    request['Authorization'] = ENV['SLACK_REPLY_TOKEN']
     request.body = JSON.dump({
-                               'channel' => 'C01GZQ5T589', # env var
+                               'channel' => ENV['SLACK_CHANNEL'], # env var
                                'thread_ts' => thread_ts,
                                'text' => format_message,
                                'as_user' => true

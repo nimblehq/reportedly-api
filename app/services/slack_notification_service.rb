@@ -13,24 +13,28 @@ class SlackNotificationService
 
       return unless SlackThread.find_by(created_on: Time.zone.today).nil?
 
-      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(set_request_body(uri))
-      end
-
-      result = JSON.parse(response.body)
+      result = slack_result(uri, req_options)
 
       SlackThread.create(thread_ts: result['ts'], created_on: Time.zone.today)
     end
 
     private
 
-    def set_request_body(uri)
+    def slack_result(uri, req_options)
+      response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+        http.request(request_body(uri))
+      end
+
+      JSON.parse(response.body)
+    end
+
+    def request_body(uri)
       request = Net::HTTP::Post.new(uri)
       request.content_type = 'application/json'
-      request['Authorization'] = 'Bearer xoxb-1289907288471-1577816759697-unrSMHhgnn5EocXsOHmqBynn'
+      request['Authorization'] = ENV['SLACK_BOT_TOKEN']
       request.body = JSON.dump({
-                                 'channel' => 'C01GZQ5T589',
-                                 'text' => "Here are the results of Nimble - Daily Standup on #{Time.zone.now.to_date}"
+                                 channel: ENV['SLACK_CHANNEL'],
+                                 text: "Here are the results of Nimble - Daily Standup on #{Time.zone.now.to_date}"
                                })
       request
     end
