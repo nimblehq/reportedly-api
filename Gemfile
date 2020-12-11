@@ -12,6 +12,7 @@ gem 'ffaker' # A library for generating fake data such as names, addresses, and 
 gem 'fabrication' # Fabrication generates objects in Ruby. Fabricators are schematics for your objects, and can be created as needed anywhere in your app or specs.
 gem 'sidekiq' # background processing for Ruby
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
+gem 'whenever', require: false
 
 # Authentications & Authorizations
 gem 'devise' # Authentication solution for Rails with Warden
