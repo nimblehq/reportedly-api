@@ -9,7 +9,6 @@ default: &default
   AVAILABLE_LOCALES: "en"
   DEFAULT_LOCALE: "en"
   FALLBACK_LOCALES: "en"
-  SLACK_WEBHOOK: "https://hooks.slack.com/services/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"
 
 development:
   <<: *default
