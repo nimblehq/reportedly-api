@@ -6,7 +6,6 @@ require 'json'
 
 class SlackNotificationService
   class << self
-
     # :reek:NilCheck
     def init_reporting_thread
       uri = URI.parse('https://slack.com/api/chat.postMessage')
