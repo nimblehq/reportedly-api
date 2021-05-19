@@ -50,6 +50,7 @@ group :development, :test do
   gem 'rubocop-rails', require: false # A RuboCop extension focused on enforcing Rails best practices and coding conventions.
   gem 'rubocop-rspec', require: false # Code style checking for RSpec files
   gem 'rubocop-performance', require: false # An extension of RuboCop focused on code performance checks.
+  gem "graphiql-rails"
 
   gem 'undercover' # Report missing test coverage in new changes
   gem 'danger' # Automated code review.
@@ -83,3 +84,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem "graphql", "~> 1.9"
